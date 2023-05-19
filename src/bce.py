@@ -1,4 +1,5 @@
 from need import Need
+#import numpy as np
 
 class BCE():
     
