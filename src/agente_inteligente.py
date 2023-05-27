@@ -3,7 +3,7 @@ from bce import BCE
 class Agente_Inteligente():
     
     def __init__(self):
-        self.estado_bce = BCE().none()
+        self.estado_bce = BCE().zero()
 
     def status(self):
         return self.estado_bce

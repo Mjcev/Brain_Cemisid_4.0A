@@ -36,4 +36,3 @@ class RN_7_sentidos():
         for index, sentido in enumerate(self.list_sentidos):
             self.sentidos[index].init_patrones(arr_patrones_bce[index])
         
-

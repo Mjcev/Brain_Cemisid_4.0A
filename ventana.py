@@ -6,8 +6,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
 
-        self.label.setText("Haz clic en el botón")
-        self.pushButton.setText("Presióname")
+        #self.label.setText("Haz clic en el botón")
+        #self.pushButton.setText("Presióname")
 
         # Conectamos los eventos con sus acciones
         self.pushButton.clicked.connect(self.actualizar)

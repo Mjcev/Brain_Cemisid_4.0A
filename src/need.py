@@ -2,8 +2,11 @@ import random
 import numpy as np
 
 #random.seed(2)
+
+len_degree=4
+
 class Need():
-    def __init__(self, sign=0, degree=0, len_degree=4):
+    def __init__(self, sign=0, degree=0, len_degree=len_degree):
 
         self.len_sign=2
         self.len_degree=len_degree
@@ -11,7 +14,7 @@ class Need():
         if sign==None and degree==None:
             self.state = np.array([sign,degree]) 
         else:
-            self.state = np.array([sign,degree], dtype=np.int8) 
+            self.state = np.array([sign,degree], dtype=np.int_) 
         
         self.sign_str={0:"+",1:"-"}
 
@@ -62,6 +65,33 @@ class Need():
                     
         return Need(sign,degree)
     
+    def __sub__(self, other):	#To get called on subtraction operation using - operator.  
+        if other.state[0] == None and other.state[1] == None:
+            return self
+        elif other.state[0] == 0:
+            sign=1
+        elif other.state[0] == 1:
+            sign=0
+        return self+Need(sign,other.state[1])
+
+    def __mul__(self, escalar):	#To get called on multiplication operation using * operator.
+        if self.state[0] == 0 and escalar >= 0 or self.state[0] == 1 and escalar < 0:
+            return Need(0,self.state[1]*escalar)+Need(0,0)
+        else:
+            return Need(1,self.state[1]*escalar)+Need(0,0)
+
+    def __truediv__(self, escalar):	#To get called on division operation using / operator.
+        if self.state[0] == 0 and escalar > 0 or self.state[0] == 1 and escalar < 0:
+            return Need(0,self.state[1]/escalar)+Need(0,0)
+        else:
+            return Need(1,self.state[1]/escalar)+Need(0,0)
+
+    def __floordiv__(self, escalar):	#To get called on division operation using // operator.
+        if self.state[0] == 0 and escalar > 0 or self.state[0] == 1 and escalar < 0:
+            return Need(0,self.state[1]//escalar)+Need(0,0)
+        else:
+            return Need(1,self.state[1]//escalar)+Need(0,0)
+
     def __lt__(self, other):    #To get called on comparison using < operator.
         if self.state[0]==None and self.state[1]==None and other.state[0]!=None and other.state[1]!=None:
             return True
@@ -109,15 +139,22 @@ class Need():
             return False
 
     def reset(self):
-        sign=random.randint(0,1)
-        degree=random.randint(0,2)
-        self.state=np.array([sign,degree], dtype=np.int8)
+        sign=random.randint(0,self.len_sign-1)
+        degree=random.randint(0,self.len_degree-1)
+        self.state=np.array([sign,degree], dtype=np.int_)
 
     def sample(self):
-        sign=random.randint(0,1)
-        degree=random.randint(0,3)
+        sign=random.randint(0,self.len_sign-1)
+        degree=random.randint(0,self.len_degree-1)
         return Need(sign,degree)
+
+    def time_sample(self):
+        sign=1
+        degree=random.randint(0,self.len_degree-1)
+        return Need(sign,degree)
+
+    def zero(self):
+        return Need(0,0)
 
     def none(self):
         return Need(None,None)
-
