@@ -1,8 +1,8 @@
-from rn_7_sentidos import RN_7_sentidos
-from agente_inteligente import Agente_Inteligente
+from sensory_system import Sensory_system
+from intelligent_agent import Intelligent_agent
 
-rn_sentidos = RN_7_sentidos()
-agente_inteligente = Agente_Inteligente()
+sensory_system = Sensory_system()
+intelligent_agent = Intelligent_agent()
 
 #Agente Daniel
 memoria_daniel = MemoriaDaniel()
@@ -11,10 +11,10 @@ memoria_daniel = MemoriaDaniel()
 eventos = []
 
 #entrada de eventos a la red neuronal de michael
-bce_7 = rn_sentidos.recibir_evento(eventos) #-> (BCE, #RN, evento):
+bce_7 = sensory_system.set_event(eventos) #-> (BCE, #RN, evento):
 
 #entrada del comparador 1 de maria para actualizar los bce de las neuronas
-agente_inteligente.actualizar_neurona(AgenteMaria().comparador)
+sensory_system.update_neuron(AgenteMaria().comparador)
 
 #Datos de las neuronas actualizadas con sus bce
 bce_7_actualizado = agente_inteligente.status()

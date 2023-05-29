@@ -3,10 +3,10 @@ import numpy as np
 
 #random.seed(2)
 
-len_degree=4
+LEN_DEGREE=4
 
 class Need():
-    def __init__(self, sign=0, degree=0, len_degree=len_degree):
+    def __init__(self, sign=0, degree=0, len_degree=LEN_DEGREE):
 
         self.len_sign=2
         self.len_degree=len_degree
@@ -158,3 +158,16 @@ class Need():
 
     def none(self):
         return Need(None,None)
+
+#ejemplos de otros metodos magicos
+#__add__(self, other)	To get called on add operation using + operator
+#__sub__(self, other)	To get called on subtraction operation using - operator.  
+#__lt__(self, other)	To get called on comparison using < operator.
+#__le__(self, other)	To get called on comparison using <= operator.
+#__ge__(self, other)	To get called on comparison using >= operator.
+#__gt__(self, other)	To get called on comparison using > operator.
+#__eq__(self, other)	To get called on comparison using == operator.
+#__ne__(self, other)	To get called on comparison using != operator.
+#__mul__(self, other)	To get called on multiplication operation using * operator.
+#__floordiv__(self, other)	To get called on floor division operation using // operator.
+#__truediv__(self, other)	To get called on division operation using / operator.
