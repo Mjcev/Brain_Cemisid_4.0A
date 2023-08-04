@@ -61,7 +61,7 @@ class Need():
                     sign = 0
                     degree = abs(self.state[1]-other.state[1])
                     
-        return Need(sign,min(degree,len_degree))
+        return Need(sign,min(degree,self.len_degree))
     
     def __sub__(self, other):	#To get called on subtraction operation using - operator.  
         if other.state[0] == None and other.state[1] == None:
@@ -190,18 +190,4 @@ class Need():
             return Need(1,abs(avg))+Need(0,0)
         else:
             return Need(0,abs(avg))+Need(1,0)
-
-        
-#ejemplos de otros metodos magicos
-#__add__(self, other)	To get called on add operation using + operator
-#__sub__(self, other)	To get called on subtraction operation using - operator.  
-#__lt__(self, other)	To get called on comparison using < operator.
-#__le__(self, other)	To get called on comparison using <= operator.
-#__ge__(self, other)	To get called on comparison using >= operator.
-#__gt__(self, other)	To get called on comparison using > operator.
-#__eq__(self, other)	To get called on comparison using == operator.
-#__ne__(self, other)	To get called on comparison using != operator.
-#__mul__(self, other)	To get called on multiplication operation using * operator.
-#__floordiv__(self, other)	To get called on floor division operation using // operator.
-#__truediv__(self, other)	To get called on division operation using / operator.
 
