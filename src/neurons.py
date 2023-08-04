@@ -8,10 +8,10 @@ class Neurons():
         self.tmp = None
 
     def set_event(self, string):
-        pattenr, event = string.split(":")
+        pattern, event = string.split(":")
         
         if event not in self.learned_neurons:
-            self.neuron_to_learn[event]=[len(self.learned_neurons),self.learned_neurons[pattenr][1]]
+            self.neuron_to_learn[event]=[len(self.learned_neurons),self.learned_neurons[pattern][1]]
             return self.neuron_to_learn[event]
         else:
             self.tmp = self.learned_neurons[event]
@@ -28,7 +28,7 @@ class Neurons():
         if bool(self.neuron_to_learn):
             event, value = self.neuron_to_learn.popitem()
             id_neurona = len(self.learned_neurons)
-            self.learned_neurons[event]=[id_neurona,(bce+value[1])//2]
+            self.learned_neurons[event]=[id_neurona,(bce.average(value[1]))]
             return self.learned_neurons[event]
         else:
             return self.tmp 

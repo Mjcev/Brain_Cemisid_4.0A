@@ -9,7 +9,7 @@ class BCE():
         self.biological = need_bio
         self.culture = need_cul
         self.emotional = need_emo
-
+    
     def state(self):
         return np.array([ self.biological.state, self.culture.state, self.emotional.state ], dtype=np.int_)  
         
@@ -36,10 +36,14 @@ class BCE():
         return BCE(self.biological/escalar,self.culture/escalar,self.emotional/escalar)
     
     def reset(self):
+        
         self.biological.reset()
         self.culture.reset()
         self.emotional.reset()
+        return self
 
+    def average(self,other):
+        return BCE(self.biological.average(other.biological),self.culture.average(other.culture),self.emotional.average(other.emotional))
 
 
     def sample(self):
