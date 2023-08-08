@@ -17,3 +17,7 @@ class Intelligent_agent():
     
     def __repr__(self) -> str:
         return str(self.status_bce)
+    
+    def reset(self):
+        self.status_bce = BCE().zero()
+        return self.status

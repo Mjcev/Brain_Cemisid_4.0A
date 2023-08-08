@@ -15,10 +15,10 @@ class BCE():
         
         #self.sign_str={0:"+",1:"-"}
     def __str__(self):
-        return f"Biological:{str(self.biological)} Culture:{str(self.culture)} Emotional:{str(self.emotional)}"
+        return f"Bio:{str(self.biological)} Cul:{str(self.culture)} Emot:{str(self.emotional)}"
 
     def __repr__(self):
-        return f"Biological:{str(self.biological)} Culture:{str(self.culture)} Emotional:{str(self.emotional)}"
+        return f"Bio:{str(self.biological)} Cul:{str(self.culture)} Emot:{str(self.emotional)}"
     
     def __add__(self, other):
         return BCE(self.biological+other.biological,self.culture+other.culture,self.emotional+other.emotional)

@@ -72,32 +72,32 @@ class Need():
             sign=0
         return self+Need(sign,other.state[1])
 
-    def __mul__(self, escalar):	#To get called on multiplication operation using * operator.
-        if self.state[0] == 0 and escalar >= 0:
+    def __mul__(self, scalar):	#To get called on multiplication operation using * operator.
+        if self.state[0] == 0 and scalar >= 0:
             sign=0
-        elif self.state[0] == 1 and escalar < 0:
+        elif self.state[0] == 1 and scalar < 0:
             sign=0
         else:
             sign=1
-        return Need(sign,self.state[1]*abs(escalar))+Need(0,0)
+        return Need(sign,self.state[1]*abs(scalar))+Need(0,0)
 
-    def __truediv__(self, escalar):	#To get called on division operation using / operator.
-        if self.state[0] == 0 and escalar >= 0:
+    def __truediv__(self, scalar):	#To get called on division operation using / operator.
+        if self.state[0] == 0 and scalar >= 0:
             sign=0
-        elif self.state[0] == 1 and escalar < 0:
+        elif self.state[0] == 1 and scalar < 0:
             sign=0
         else:
             sign=1
-        return Need(sign,self.state[1]/abs(escalar))+Need(0,0)
+        return Need(sign,self.state[1]/abs(scalar))+Need(0,0)
 
-    def __floordiv__(self, escalar):	#To get called on division operation using // operator.
-        if self.state[0] == 0 and escalar >= 0:
+    def __floordiv__(self, scalar):	#To get called on division operation using // operator.
+        if self.state[0] == 0 and scalar >= 0:
             sign=0
-        elif self.state[0] == 1 and escalar < 0:
+        elif self.state[0] == 1 and scalar < 0:
             sign=0
         else:
             sign=1
-        return Need(sign,self.state[1]//abs(escalar))+Need(0,0)
+        return Need(sign,self.state[1]//abs(scalar))+Need(0,0)
 
     def __lt__(self, other):    #To get called on comparison using < operator.
         if self.state[0]==None and self.state[1]==None and other.state[0]!=None and other.state[1]!=None:

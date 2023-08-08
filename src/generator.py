@@ -4,7 +4,7 @@ import random
 class Generator():
 
     def __init__(self):
-        n_items=10
+        n_items=3
         self.generic_pattern_arr=["pattern_zero","pattern_zero2"]+["pattern_{:03d}".format(i) for i in range(n_items)]
         self.arr_senses=["sight","hearing","smell","taste","touch","body","time"]
         self.generic_event_arr=["event_{:03d}".format(i) for i in range(n_items)]

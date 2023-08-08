@@ -11,6 +11,10 @@ class Neurons():
         pattern, event = string.split(":")
         
         if event not in self.learned_neurons:
+
+            #print("Llave Buscada",pattern)
+            #print("Llaves Disponibles",self.learned_neurons.keys())
+
             self.neuron_to_learn[event]=[len(self.learned_neurons),self.learned_neurons[pattern][1]]
             return self.neuron_to_learn[event]
         else:
@@ -33,10 +37,22 @@ class Neurons():
         else:
             return self.tmp 
 
-    def init_patterns(self,arr_patternes_bce):
-        for pattern_bce in arr_patternes_bce:
-            self.learned_neurons[pattern_bce[0]]=[len(self.learned_neurons),pattern_bce[1]]
+    def init_patterns(self,arr_patterns_bce):
+        #print(arr_patterns_bce)
+        list_return = []
+        for pattern_bce in arr_patterns_bce:
+            id_neurons = len(self.learned_neurons)
+            data_return = (id_neurons,)+pattern_bce
+            list_return.append(data_return)
+            #list_id_neurons.append(id_neurons)
+            self.learned_neurons[pattern_bce[0]]=[id_neurons,pattern_bce[1]]
+        return list_return
+        
 
     def get_neurons(self):
         return self.learned_neurons
 
+    def reset(self):
+        self.learned_neurons = {}
+        self.neuron_to_learn = {}
+        
