@@ -244,14 +244,15 @@ def next():
         subelement_entries[i].delete(0, tk.END)
         subelement_entries[i].insert(tk.END, "Evento"+str(random.randint(0, 10)))
 
+        #element_entries[i].set(element_entries[i]['values'][random.randint(0, len(element_entries[i]['values']) - 1)])
 
     
+    bce_to_add_all = agent_maria.general_evaluator_bce(bce_7)
+    bce_to_add = bce_to_add_all[0][0][1]
 
-    print(agent_maria.general_evaluator_bce(bce_7)[0][0])
-    bce_to_add = agent_maria.general_evaluator_bce(bce_7)[0][0][1]
     bce_entry_2.config(state="normal")
     bce_entry_2.delete(0, tk.END)
-    bce_entry_2.insert(0, bce_to_add)
+    bce_entry_2.insert(0, bce_to_add_all[0])
     bce_entry_2.config(state="readonly")
 
     agent.update_bce(bce_to_add)
@@ -336,11 +337,6 @@ for i in range(7):
     list_added_parents.append(set())
 
     tree.bind("<<TreeviewSelect>>", lambda event, index=i: update_combobox_tree(event, tree_list[index], element_entries[index]))
-
-# Conjuntos para realizar seguimiento de elementos agregados
-#added_roots = set()
-#added_parents = set()
-
 
 
 #label
