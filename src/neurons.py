@@ -11,10 +11,6 @@ class Neurons():
         pattern, event = string.split(":")
         
         if event not in self.learned_neurons:
-
-            #print("Llave Buscada",pattern)
-            #print("Llaves Disponibles",self.learned_neurons.keys())
-
             self.neuron_to_learn[event]=[len(self.learned_neurons),self.learned_neurons[pattern][1]]
             return self.neuron_to_learn[event]
         else:
