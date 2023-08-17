@@ -238,7 +238,7 @@ def next():
     for i, tree in enumerate(tree_list):
         bce_entrys[i].config(state="normal")
         bce_entrys[i].delete(0, tk.END)
-        bce_entrys[i].insert(0, bce_7[i][0])
+        bce_entrys[i].insert(0, bce_7[i])
         bce_entrys[i].config(state="readonly")
 
         subelement_entries[i].delete(0, tk.END)
@@ -248,7 +248,7 @@ def next():
 
     
     bce_to_add_all = agent_maria.general_evaluator_bce(bce_7)
-    bce_to_add = bce_to_add_all[0][0][1]
+    bce_to_add = bce_to_add_all[0][1]
 
     bce_entry_2.config(state="normal")
     bce_entry_2.delete(0, tk.END)

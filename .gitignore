@@ -3,6 +3,9 @@ src/all/*
 __pycache__/*
 src/__pycache__/*
 src/render.ps1
-BrainCemisid_V4.0A copy.ipynb
 src/images/*
-.ipynb_checkpoints/BrainCemisid_V4.0A-checkpoint.ipynb
+BrainCemisid_V4.0A copy.ipynb
+.pytest_cache
+.vscode
+.ipynb_checkpoints/*
+
