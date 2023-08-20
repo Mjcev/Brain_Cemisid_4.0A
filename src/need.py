@@ -114,9 +114,7 @@ class Need():
         return Need(sign,self.state[1]*abs(escalar))+Need(0,0)
 
     def __truediv__(self, escalar):	#To get called on division operation using / operator.
-        if self.state[1]==0:
-            sign=self.state[0]
-        elif self.state[0] == 0 and escalar > 0:
+        if self.state[0] == 0 and escalar > 0:
             sign=0
         elif self.state[0] == 1 and escalar < 0:
             sign=0
@@ -125,9 +123,7 @@ class Need():
         return Need(sign,self.state[1]/abs(escalar))+Need(0,0)
 
     def __floordiv__(self, escalar):	#To get called on division operation using // operator.
-        if self.state[1]==0:
-            sign=self.state[0]
-        elif self.state[0] == 0 and escalar > 0:
+        if self.state[0] == 0 and escalar > 0:
             sign=0
         elif self.state[0] == 1 and escalar < 0:
             sign=0

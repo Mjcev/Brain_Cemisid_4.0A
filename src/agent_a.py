@@ -1,8 +1,5 @@
 from sensory_system import Sensory_system
 from intelligent_agent import Intelligent_agent
-from agent_maria import Agent_Maria
-from generator import Generator
-LEN_DEGREE=4
 
 class Agent_A():
     
