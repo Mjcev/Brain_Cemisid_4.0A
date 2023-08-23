@@ -261,4 +261,4 @@ def test_ne_operator(need1, need2, expected_result):
 # Prueba del método average
 @pytest.mark.parametrize("need1, need2, expected_result", parameters_average)
 def test_average_method(need1, need2, expected_result):
-    assert (need1.average(need2) ) == expected_result
+    assert (Need.average(need1,need2) ) == expected_result

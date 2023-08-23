@@ -171,6 +171,6 @@ def test_bce_average(biological1, cultural1, emotional1, biological2, cultural2,
     bce1 = BCE(biological1, cultural1, emotional1)
     bce2 = BCE(biological2, cultural2, emotional2)
 
-    bce_avg = bce1.average(bce2)
+    bce_avg = BCE.average(bce1,bce2)
 
     assert np.array_equal(bce_avg.state(), expected_state)
