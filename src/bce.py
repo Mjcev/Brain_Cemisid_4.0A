@@ -22,10 +22,10 @@ class BCE():
         
         #self.sign_str={0:"+",1:"-"}
     def __str__(self):
-        return f"B:{str(self.biological)} C:{str(self.culture)} E:{str(self.emotional)}"
+        return f"Bio:{str(self.biological)} Cul:{str(self.culture)} Emo:{str(self.emotional)}"
 
     def __repr__(self):
-        return f"B:{str(self.biological)} C:{str(self.culture)} E:{str(self.emotional)}"
+        return f"Bio:{str(self.biological)} Cul:{str(self.culture)} Emo:{str(self.emotional)}"
     
     def __add__(self, other):
         return BCE(self.biological+other.biological,self.culture+other.culture,self.emotional+other.emotional)
@@ -86,7 +86,8 @@ class BCE():
         self.culture.reset()
         self.emotional.reset()
         return self
-
+    
+    @staticmethod
     def average(*args):
         if len(args)==0:
             return None
@@ -101,6 +102,7 @@ class BCE():
             emo.append(item.emotional)
         
         return BCE(Need.average(*bio),Need.average(*cul),Need.average(*emo))
+
 
     def sample(self):
         return BCE(self.biological.sample(),self.culture.sample(),self.emotional.sample())

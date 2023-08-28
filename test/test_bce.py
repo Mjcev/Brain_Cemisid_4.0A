@@ -13,7 +13,7 @@ import itertools
 import pytest
 
 
-possible_combinations = list(itertools.product([0, 1], range(5), repeat=6))
+possible_combinations = list(itertools.product([0, 1], range(4), repeat=6))
 random_sample_100 = random.sample(possible_combinations, 100)
 
 parameters_bce_add = []
@@ -70,9 +70,9 @@ for need in random_sample_100:
     cul2 = Need(*need[8:10])
     emo2 = Need(*need[10:12])
 
-    b_resul=bio1.average(bio2)
-    c_resul=cul1.average(cul2)
-    e_resul=emo1.average(emo2)
+    b_resul=Need.average(bio1,bio2)
+    c_resul=Need.average(cul1,cul2)
+    e_resul=Need.average(emo1,emo2)
     
     bce_resul=BCE(b_resul,c_resul,e_resul).state()
     ret_val=(bio1,cul1,emo1,bio2,cul2,emo2,bce_resul)
@@ -162,7 +162,7 @@ def test_bce_average_manual(biological1, cultural1, emotional1, biological2, cul
     bce1 = BCE(biological1, cultural1, emotional1)
     bce2 = BCE(biological2, cultural2, emotional2)
 
-    bce_avg = bce1.average(bce2)
+    bce_avg = BCE.average(bce1,bce2)
 
     assert np.array_equal(bce_avg.state(), expected_state)
 

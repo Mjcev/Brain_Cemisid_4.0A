@@ -1,5 +1,5 @@
 import random
-
+#Agente modelo del agente de Maria modulo B
 class Agent_Maria():
     def __init__(self):
         pass

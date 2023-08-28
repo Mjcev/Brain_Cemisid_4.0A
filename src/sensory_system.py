@@ -1,5 +1,5 @@
 from sensory_nn import Sensory_NN
-
+from bce import BCE
 class Sensory_system():
     
     def __init__(self):
@@ -36,7 +36,18 @@ class Sensory_system():
                 list_id_bce.append(resultado)
         return list_id_bce
     
-    
+    def get_bce_from_mind(self,dictionary):
+        list_return=[]
+        bce_list = []
+        index = ["biological","cultural","emotional"]
+        for _, key in enumerate(self.list_senses):
+            bce_list = []
+            for key_bce in index:
+                bce_list.append(dictionary[key][key_bce])
+                #list_return.append(value)
+            list_return.append(BCE(*bce_list))
+        return list_return
+
     def init_patterns(self,arr_patternes_bce):
         list_return=[]
         for index, _ in enumerate(self.list_senses):
@@ -44,5 +55,5 @@ class Sensory_system():
         return list_return
         
     def reset(self):
-        for index, sense in enumerate(self.list_senses):
+        for index, _ in enumerate(self.list_senses):
             self.senses[index].reset()

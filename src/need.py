@@ -209,6 +209,7 @@ class Need():
         self.state=[sign,degree]
         return self
 
+    @staticmethod
     def average(*args):
         if not args:
             return None  # Si no se proporcionan valores, retorna None o algún otro valor apropiado
@@ -219,7 +220,6 @@ class Need():
                 items.append(item.state[1])
             else:
                 items.append(item.state[1]*(-1))
-
         total = sum(items)
         avg = total // len(args)
 

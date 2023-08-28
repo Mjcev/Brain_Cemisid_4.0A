@@ -9,7 +9,7 @@ sign=[1,-1]
 sign_sub = [-1,1]
 len_escalar=range(-4,LEN_DEGREE)
 
-
+#Parameters to test add
 parameters_add = [
     (
         sign1,
@@ -23,9 +23,7 @@ parameters_add = [
     for val in [sign[sign1] * degree1 + sign[sign2] * degree2]
 ]
 
-
-#print(parameters_add)
-
+#Parameters to test sub
 parameters_sub = [
     (
         sign1,
@@ -39,8 +37,7 @@ parameters_sub = [
     for val in [sign[sign1] * degree1 + sign_sub[sign2] * degree2]
 ]
 
-#print(parameters_sub)
-
+#Parameters to test mul
 parameters_mul = [
     (
         sign1,
@@ -53,8 +50,7 @@ parameters_mul = [
     for val in [sign[sign1] * degree1 * escalar]
 ]
 
-#print(parameters_mul)
-
+#Parameters to test div
 parameters_div = [
     (
         sign1,
@@ -68,8 +64,7 @@ parameters_div = [
     for val in [int(sign[sign1] * degree1 / escalar)]
 ]
 
-#print(parameters_div)
-
+#Parameters to test lt
 parameters_lt = [
     (
         Need(sign1, degree1),
@@ -80,8 +75,7 @@ parameters_lt = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_lt)
-
+#Parameters to test le
 parameters_le = [
     (
         Need(sign1, degree1),
@@ -92,8 +86,7 @@ parameters_le = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_le)
-
+#Parameters to test eq
 parameters_eq = [
     (
         Need(sign1, degree1),
@@ -104,8 +97,7 @@ parameters_eq = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_eq)
-
+#Parameters to test gt
 parameters_gt = [
     (
         Need(sign1, degree1),
@@ -116,8 +108,7 @@ parameters_gt = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_gt)
-
+#Parameters to test ge
 parameters_ge = [
     (
         Need(sign1, degree1),
@@ -128,8 +119,7 @@ parameters_ge = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_ge)
-
+#Parameters to test ne
 parameters_eq = [
     (
         Need(sign1, degree1),
@@ -140,8 +130,7 @@ parameters_eq = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_eq)
-
+#Parameters to test ne
 parameters_ne = [
     (
         Need(sign1, degree1),
@@ -152,8 +141,7 @@ parameters_ne = [
     for num1, num2 in [(sign[sign1] * degree1, sign[sign2] * degree2)]
 ]
 
-#print(parameters_ne)
-
+#Parameters to test average
 parameters_average = []
 for sign1 in len_sign:
     for degree1 in len_degree:
@@ -178,9 +166,6 @@ for sign1 in len_sign:
                 ret_val=(Need(sign1,degree1),Need(sign2,degree2),Need(expected_sign,expected_degree))
                 parameters_average.append(ret_val)
                 
-#print(parameters_average)
-
-
 
 # Prueba del método __add__
 @pytest.mark.parametrize("sign1, degree1, sign2, degree2, expected_sign, expected_degree", parameters_add)
@@ -262,3 +247,36 @@ def test_ne_operator(need1, need2, expected_result):
 @pytest.mark.parametrize("need1, need2, expected_result", parameters_average)
 def test_average_method(need1, need2, expected_result):
     assert (Need.average(need1,need2) ) == expected_result
+
+NUM_STATE=10
+ADD=4
+
+len_sign=range(2)
+len_degree_state=range(NUM_STATE-1)
+len_degree_add=range(ADD)
+sign=[1,-1]
+
+#Parameters to test add
+parameters_add_10 = [
+    (
+        sign1,
+        degree1,
+        sign2,
+        degree2,
+        0 if val > 0 else 1 if val < 0 else sign1,
+        min(abs(val), NUM_STATE),
+    )
+    for (sign1, degree1, sign2, degree2) in product(len_sign, len_degree_state, len_sign, len_degree_add)
+    for val in [sign[sign1] * degree1 + sign[sign2] * degree2]
+]
+
+NUM_STATE=10
+# Prueba del método __add__
+@pytest.mark.parametrize("sign1, degree1, sign2, degree2, expected_sign, expected_degree", parameters_add_10)
+def test_add_10(sign1, degree1, sign2, degree2, expected_sign, expected_degree):
+    need1 = Need(sign=sign1, degree=degree1,len_degree=NUM_STATE)
+    need2 = Need(sign=sign2, degree=degree2,len_degree=NUM_STATE)
+    need_sum = need1 + need2
+
+    assert need_sum.state[0] == expected_sign
+    assert need_sum.state[1] == expected_degree

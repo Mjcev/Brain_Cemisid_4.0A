@@ -102,3 +102,78 @@ def sensory_system():
 def test_init_patterns(sensory_system, arr_pattern, expected):
     result = sensory_system.init_patterns(arr_pattern)
     assert result == expected
+
+# Generación de valores aleatorios para los patrones
+num_patterns = 1000  # Número de patrones
+
+senses=["sight","hearing","smell","taste","touch","body","time"]
+# Generar casos de prueba para pytest.mark.parametrize
+
+# Crear lista de patrones con valores BCE aleatorios
+
+arr_patternes_7_senses = []
+for sense in senses:
+    arr_patternes_bce = []
+    for i in range(num_patterns):
+        pattern_name = f"{sense}_pattern_{i:02d}"
+        bce_value = BCE().sample()
+        arr_patternes_bce.append((pattern_name, bce_value, i))
+    arr_patternes_7_senses.append(arr_patternes_bce)
+
+# Lista de eventos aleatorios
+event_list_7_senses=[]
+for i, sense in enumerate(senses):
+    #print(sense,i)
+    events_list = [(f"{random.choice(arr_patternes_7_senses[i])[0]}:{sense}_event_{random.randint(0, 99):02d}",BCE().sample()) for _ in range(num_patterns//2)]
+    events_list2 = [(f"{random.choice(arr_patternes_7_senses[i])[0]}:{random.choice(arr_patternes_7_senses[i])[0]}",BCE().sample()) for _ in range(num_patterns//2)]
+    events_list+=events_list2
+    event_list_7_senses.append(events_list)
+
+
+num_test_cases = num_patterns
+
+parameters_sensory_system_behavior = []
+
+for i in range(num_test_cases):
+
+    list_arr_sense=[]
+    list_pattern_event=[]
+    list_bce_event=[]
+    list_output=[]
+    
+    for index_sense, sense in enumerate(senses):
+        pattern = event_list_7_senses[index_sense][i][0].split(':')[0]
+        event = event_list_7_senses[index_sense][i][0].split(':')[1]
+        bce_pattern = next((data for p, data, _ in arr_patternes_7_senses[index_sense] if p == pattern ), None)
+        bce_event = event_list_7_senses[index_sense][i][1]
+        index = next((index for e, _, index in arr_patternes_7_senses[index_sense] if e == event), len(arr_patternes_7_senses[index_sense]))
+        
+        combined_info = [
+            index,  # Índice del elemento seleccionado de pattern
+            BCE.average(bce_event, bce_pattern) if index == len(arr_patternes_7_senses[index_sense]) else arr_patternes_7_senses[index_sense][index][1],
+            pattern if index == len(arr_patternes_7_senses[index_sense]) else '',  # El pattern seleccionado
+            event,       # El evento seleccionado
+            sense
+        ]
+        pattern_event = f"{pattern}:{event}"
+        output = combined_info
+        arr_patternes_bce_2 = [(pattern, bce_value) for pattern, bce_value, _ in arr_patternes_7_senses[index_sense]]
+
+        list_arr_sense.append(arr_patternes_bce_2)
+        list_pattern_event.append(pattern_event)
+        list_bce_event.append(bce_event)
+        list_output.append(output)
+
+
+    parameters_sensory_system_behavior.append((list_arr_sense,list_pattern_event,list_bce_event,list_output))
+
+
+
+@pytest.mark.parametrize("arr_patterns_bce, pattern_events, bce_event, expected_output", parameters_sensory_system_behavior)
+def test_sensory_system_behavior( arr_patterns_bce, pattern_events, bce_event, expected_output):
+    sensory_system=Sensory_system()
+    sensory_system.init_patterns(arr_patterns_bce)
+    sensory_system.set_event(pattern_events)
+    output = sensory_system.update_neuron(bce_event)
+
+    assert output == expected_output
