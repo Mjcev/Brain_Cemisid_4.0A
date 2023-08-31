@@ -53,8 +53,8 @@ def test_repr_representation(agent):
 possible_combinations = list(itertools.product([0, 1], range(4), repeat=6))
 random_sample_1000 = random.sample(possible_combinations, 1000)
 
-parameters_add_bce = []
-for need in random_sample_1000:
+parameters_intelligent_agent_behavior = []
+for need in possible_combinations:
 
     current_bce = BCE(Need(*need[0:2]), Need(*need[2:4]), Need(*need[4:6]))
     input_bce = BCE(Need(*need[6:8]), Need(*need[8:10]), Need(*need[10:12]))
@@ -63,10 +63,10 @@ for need in random_sample_1000:
     
 
     ret_val=(current_bce,input_bce,bce_resul)
-    parameters_add_bce.append(ret_val)
+    parameters_intelligent_agent_behavior.append(ret_val)
 
-@pytest.mark.parametrize("current_bce, input_bce, expected_status", parameters_add_bce)
-def test_add_bce_2(agent, current_bce, input_bce, expected_status):
+@pytest.mark.parametrize("current_bce, input_bce, expected_status", parameters_intelligent_agent_behavior)
+def test_intelligent_agent_behavior(agent, current_bce, input_bce, expected_status):
     agent.status_bce = current_bce
     agent.add_bce(input_bce)
 

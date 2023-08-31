@@ -174,3 +174,36 @@ def test_bce_average(biological1, cultural1, emotional1, biological2, cultural2,
     bce_avg = BCE.average(bce1,bce2)
 
     assert np.array_equal(bce_avg.state(), expected_state)
+
+
+possible_combinations = list(itertools.product([0, 1], range(4), repeat=6))
+print(f"len possible_combinations:{len(possible_combinations)}")
+#random_sample = random.sample(possible_combinations, 100)
+
+parameters_bce_add_all = []
+for need in possible_combinations:
+
+
+    bio1 = Need(*need[0:2])
+    cul1 = Need(*need[2:4])
+    emo1 = Need(*need[4:6])
+    bio2 = Need(*need[6:8])
+    cul2 = Need(*need[8:10])
+    emo2 = Need(*need[10:12])
+
+    b_resul=bio1+bio2
+    c_resul=cul1+cul2
+    e_resul=emo1+emo2
+    
+    bce_resul=BCE(b_resul,c_resul,e_resul).state()
+    ret_val=(bio1,cul1,emo1,bio2,cul2,emo2,bce_resul)
+    parameters_bce_add_all.append(ret_val)
+
+@pytest.mark.parametrize("biological1, cultural1, emotional1, biological2, cultural2, emotional2, expected_state",parameters_bce_add_all)
+def test_bce_add_all(biological1, cultural1, emotional1, biological2, cultural2, emotional2, expected_state):
+    bce1 = BCE(biological1, cultural1, emotional1)
+    bce2 = BCE(biological2, cultural2, emotional2)
+
+    bce_sum = bce1 + bce2
+
+    assert np.array_equal(bce_sum.state(), expected_state)
