@@ -52,22 +52,6 @@ class Need():
         if self.state[1] == 0 and other.state[1] == 0:
             return Need(self.state[0],self.state[1])
         
-        # sign1= [1,-1]
-        # degree1= self.state[1]*sign1[self.state[0]]
-        # degree2= other.state[1]*sign1[other.state[0]]
-
-        # ret_val=degree1+degree2
-        # if ret_val ==0:
-        #     ret_sign=self.state[0]
-        # elif ret_val >0:
-        #     ret_sign=0
-        #     ret_val=min(ret_val,self.len_degree)
-        # else:
-        #     ret_sign=1
-        #     ret_val=min(abs(ret_val),self.len_degree)
-        # return Need(ret_sign,ret_val)
-
-        #self.state[1]+other.state[1]
         elif self.state[0]==0:
            if other.state[0] == 0:
                sign = 0
